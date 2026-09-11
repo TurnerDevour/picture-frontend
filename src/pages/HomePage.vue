@@ -42,7 +42,6 @@
       <template #renderItem="{ item: picture }">
         <a-list-item style="padding: 0">
           <!-- 单张图片 -->
-          <!-- 单张图片 -->
           <a-card hoverable @click="doClickPicture(picture)">
             <template #cover>
               <img

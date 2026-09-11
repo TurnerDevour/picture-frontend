@@ -165,6 +165,14 @@ declare namespace API {
     picSize?: number
     /** 图片宽度 */
     picWidth?: number
+    /** 审核信息 */
+    reviewMessage?: string
+    /** 状态：0-待审核; 1-通过; 2-拒绝 */
+    reviewStatus?: number
+    /** 审核时间 */
+    reviewTime?: string
+    /** 审核人 id */
+    reviewerid?: string
     /** 标签（JSON 数组） */
     tags?: string
     /** 更新时间 */
@@ -211,6 +219,12 @@ declare namespace API {
     picSize?: number
     /** 图片宽度 */
     picWidth?: number
+    /** 审核信息 */
+    reviewMessage?: string
+    /** 状态：0-待审核; 1-通过; 2-拒绝 */
+    reviewStatus?: number
+    /** 审核人 id */
+    reviewerid?: string
     /** 搜索关键字 */
     searchText?: string
     sortField?: string
@@ -219,6 +233,15 @@ declare namespace API {
     tags?: string[]
     /** 创建用户 id */
     userid?: string
+  }
+
+  type PictureReviewDTO = {
+    /** 审核图片id */
+    id?: string
+    /** 审核信息 */
+    reviewMessage?: string
+    /** 审核状态 */
+    reviewStatus?: number
   }
 
   type PictureTagCategoryVO = {
@@ -263,7 +286,7 @@ declare namespace API {
     /** 图片宽度 */
     picWidth?: number
     /** 标签（JSON 数组） */
-    tags?: string
+    tags?: string[]
     /** 更新时间 */
     updateTime?: string
     /** 图片 url */
