@@ -46,14 +46,20 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/pages/admin/PictureManagePage.vue'),
   },
   {
-    path: '/add_picture',
+    path: '/admin/add_picture/batch',
+    name: 'addPictureBatch',
+    meta: { title: '批量添加图片', icon: 'FileAddOutlined', role: ACCESS.ADMIN, showNav: true },
+    component: () => import('@/pages/AddPictureBathPage.vue'),
+  },
+  {
+    path: '/admin/add_picture',
     name: 'addPicture',
-    meta: { title: '添加图片', icon: 'DiffOutlined', role: ACCESS.USER, showNav: true },
+    meta: { title: '添加图片', icon: 'DiffOutlined', role: ACCESS.ADMIN, showNav: true },
     component: () => import('@/pages/AddPicturePage.vue'),
   },
   {
     path: '/picture/:id',
-    name: '图片详情',
+    name: 'pictureDetail',
     meta: { title: '图片详情', role: ACCESS.USER, showNav: false },
     component: () => import('@/pages/PictureDetailPage.vue'),
     props: true,

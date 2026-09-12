@@ -1,3 +1,4 @@
+// @ts-ignore
 /* eslint-disable */
 import request from '@/request/request'
 
@@ -165,6 +166,36 @@ export async function uploadPictureUsingPost(
       ...params,
     },
     data: formData,
+    ...(options || {}),
+  })
+}
+
+/** uploadPictureByBatch POST /api/picture/upload/batch */
+export async function uploadPictureByBatchUsingPost(
+  body: API.PictureUploadByBatchDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseInt_>('/api/picture/upload/batch', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** uploadPictureByUrl POST /api/picture/upload/url */
+export async function uploadPictureByUrlUsingPost(
+  body: API.PictureUploadDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponsePictureVO_>('/api/picture/upload/url', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
     ...(options || {}),
   })
 }

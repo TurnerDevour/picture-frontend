@@ -24,6 +24,7 @@ import {
   Card,
   Tabs,
   Descriptions,
+  InputNumber,
 } from 'ant-design-vue'
 
 const Antd: Plugin = {
@@ -50,6 +51,7 @@ const Antd: Plugin = {
     app.use(Card)
     app.use(Tabs)
     app.use(Descriptions)
+    app.use(InputNumber)
   },
 }
 
