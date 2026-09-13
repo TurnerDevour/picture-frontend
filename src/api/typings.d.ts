@@ -181,6 +181,8 @@ declare namespace API {
     reviewerid?: string
     /** 标签（JSON 数组） */
     tags?: string
+    /** 缩略图 url */
+    thumbnailUrl?: string
     /** 更新时间 */
     updateTime?: string
     /** 图片 url */
@@ -311,6 +313,8 @@ declare namespace API {
     picWidth?: number
     /** 标签（JSON 数组） */
     tags?: string[]
+    /** 缩略图 url */
+    thumbnailUrl?: string
     /** 更新时间 */
     updateTime?: string
     /** 图片 url */

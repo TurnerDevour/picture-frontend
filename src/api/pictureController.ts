@@ -92,6 +92,51 @@ export async function listPictureVoByPageUsingPost(
   })
 }
 
+/** listPictureVOByPageCache POST /api/picture/list/page/vo/cache */
+export async function listPictureVoByPageCacheUsingPost(
+  body: API.PictureQueryDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponsePagePictureVO_>('/api/picture/list/page/vo/cache', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** listPictureVOByPageCacheDual POST /api/picture/list/page/vo/cache/dual */
+export async function listPictureVoByPageCacheDualUsingPost(
+  body: API.PictureQueryDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponsePagePictureVO_>('/api/picture/list/page/vo/cache/dual', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** listPictureVOByPageCaffeine POST /api/picture/list/page/vo/caffeine */
+export async function listPictureVoByPageCaffeineUsingPost(
+  body: API.PictureQueryDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponsePagePictureVO_>('/api/picture/list/page/vo/caffeine', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
 /** reviewPicture POST /api/picture/review */
 export async function reviewPictureUsingPost(
   body: API.PictureReviewDTO,

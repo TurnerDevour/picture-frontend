@@ -1,4 +1,3 @@
-// @ts-ignore
 /* eslint-disable */
 import request from '@/request/request'
 
@@ -17,7 +16,7 @@ export async function addUserUsingPost(body: API.UserAddDTO, options?: { [key: s
 /** deleteUser POST /api/user/delete */
 export async function deleteUserUsingPost(
   body: API.DeleteRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseBoolean_>('/api/user/delete', {
     method: 'POST',
@@ -33,7 +32,7 @@ export async function deleteUserUsingPost(
 export async function getUserUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getUserUsingGETParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseUser_>('/api/user/get', {
     method: 'GET',
@@ -48,7 +47,7 @@ export async function getUserUsingGet(
 export async function getUserVoUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getUserVOUsingGETParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseUserVO_>('/api/user/get/vo', {
     method: 'GET',
@@ -70,7 +69,7 @@ export async function getCurrentUserUsingGet(options?: { [key: string]: any }) {
 /** listUserVOByPage POST /api/user/list/page */
 export async function listUserVoByPageUsingPost(
   body: API.UserQueryDTO,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponsePageUserVO_>('/api/user/list/page', {
     method: 'POST',
@@ -105,7 +104,7 @@ export async function logoutUsingPost(options?: { [key: string]: any }) {
 /** register POST /api/user/register */
 export async function registerUsingPost(
   body: API.UserRegisterDTO,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseLong_>('/api/user/register', {
     method: 'POST',
@@ -120,7 +119,7 @@ export async function registerUsingPost(
 /** updateUser POST /api/user/update */
 export async function updateUserUsingPost(
   body: API.UserUpdateDTO,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseBoolean_>('/api/user/update', {
     method: 'POST',
