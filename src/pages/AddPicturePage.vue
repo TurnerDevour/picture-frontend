@@ -4,13 +4,17 @@
       {{ route.query?.id ? '修改图片' : '创建图片' }}
     </h2>
 
+    <a-typography-paragraph v-if="spaceId && spaceId !== 'undefined'" type="secondary">
+      保存至空间：<a :href="`/space/${spaceId}`" target="_blank">{{ spaceId }}</a>
+    </a-typography-paragraph>
+
     <!-- 选择上传方式 -->
     <a-tabs v-model:activeKey="uploadType">
       <a-tab-pane key="file" tab="文件上传">
-        <PictureUpload :picture="picture" :onSuccess="onSuccess" />
+        <PictureUpload :picture="picture" :space-id="spaceId" :onSuccess="onSuccess" />
       </a-tab-pane>
       <a-tab-pane key="url" tab="URL 上传" force-render>
-        <UrlPictureUpload :picture="picture" :onSuccess="onSuccess" />
+        <UrlPictureUpload :picture="picture" :space-id="spaceId" :onSuccess="onSuccess" />
       </a-tab-pane>
     </a-tabs>
 
@@ -56,7 +60,7 @@
 <script setup lang="ts">
 import PictureUpload from '@/components/PictureUpload.vue'
 import UrlPictureUpload from '@/components/UrlPictureUpload.vue'
-import { onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import {
   editPictureUsingPost,
   getPictureVoByIdUsingGet,
@@ -126,6 +130,11 @@ const getTagCategoryOptions = async () => {
 }
 
 // 提交表单
+// 空间 id
+const spaceId = computed(() => {
+  return String(route.query?.spaceId)
+})
+
 const handleSubmit = async (values: API.PictureEditDTO) => {
   const pictureId = picture.value?.id
   if (!pictureId) {
@@ -133,6 +142,7 @@ const handleSubmit = async (values: API.PictureEditDTO) => {
   }
   const res = await editPictureUsingPost({
     id: pictureId,
+    spaceId: spaceId.value && spaceId.value !== 'undefined' ? spaceId.value : undefined,
     ...values,
   })
   if (res.data.code === 0 && res.data.data) {

@@ -24,6 +24,7 @@ import { ref } from 'vue'
 
 interface Props {
   picture?: API.PictureVO
+  spaceId?: string
   onSuccess?: (newPicture: API.PictureVO) => void
 }
 
@@ -50,7 +51,8 @@ const loading = ref<boolean>(false)
 const handleUpload = async ({ file }: any) => {
   loading.value = true
   try {
-    const params = props.picture ? { id: props.picture.id } : {}
+    const params: API.PictureUploadDTO = props.picture ? { id: props.picture.id } : {}
+    if (props.spaceId && props.spaceId !== 'undefined') params.spaceId = props.spaceId
     const res = await uploadPictureUsingPost(params, {}, file)
     if (res.data.code === 0 && res.data.data) {
       message.success('图片上传成功')

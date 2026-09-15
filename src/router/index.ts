@@ -52,9 +52,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/pages/AddPictureBathPage.vue'),
   },
   {
-    path: '/admin/add_picture',
+    path: '/add_picture',
     name: 'addPicture',
-    meta: { title: '添加图片', icon: 'DiffOutlined', role: ACCESS.ADMIN, showNav: true },
+    meta: { title: '创建图片', icon: 'DiffOutlined', role: ACCESS.USER, showNav: true },
     component: () => import('@/pages/AddPicturePage.vue'),
   },
   {
@@ -62,6 +62,31 @@ const routes: Array<RouteRecordRaw> = [
     name: 'pictureDetail',
     meta: { title: '图片详情', role: ACCESS.USER, showNav: false },
     component: () => import('@/pages/PictureDetailPage.vue'),
+    props: true,
+  },
+  {
+    path: '/admin/spaceManage',
+    name: 'spaceManage',
+    meta: { title: '空间管理', icon: 'CloudOutlined', role: ACCESS.ADMIN, showNav: true },
+    component: () => import('@/pages/admin/SpaceManagePage.vue'),
+  },
+  {
+    path: '/add_space',
+    name: 'addSpace',
+    meta: { title: '添加空间', icon: 'CloudUploadOutlined', role: ACCESS.USER, showNav: false },
+    component: () => import('@/pages/AddSpacePage.vue'),
+  },
+  {
+    path: '/my_space',
+    name: 'mySpace',
+    meta: { title: '我的空间', icon: 'CloudOutlined', role: ACCESS.USER, showNav: false },
+    component: () => import('@/pages/MySpacePage.vue'),
+  },
+  {
+    path: '/space/:id',
+    name: 'spaceDetail',
+    meta: { title: '空间详情', role: ACCESS.USER, showNav: false },
+    component: () => import('@/pages/SpaceDetailPage.vue'),
     props: true,
   },
 ]

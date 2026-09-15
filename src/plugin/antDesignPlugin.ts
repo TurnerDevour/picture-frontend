@@ -25,6 +25,10 @@ import {
   Tabs,
   Descriptions,
   InputNumber,
+  Pagination,
+  Tooltip,
+  Progress,
+  Typography,
 } from 'ant-design-vue'
 
 const Antd: Plugin = {
@@ -52,6 +56,10 @@ const Antd: Plugin = {
     app.use(Tabs)
     app.use(Descriptions)
     app.use(InputNumber)
+    app.use(Pagination)
+    app.use(Tooltip)
+    app.use(Progress)
+    app.use(Typography)
   },
 }
 

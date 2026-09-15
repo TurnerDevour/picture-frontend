@@ -32,6 +32,13 @@
                     个人中心
                   </a-menu-item>
                   <a-menu-divider />
+                  <a-menu-item>
+                    <router-link to="/my_space">
+                      <UserOutlined />
+                      我的空间
+                    </router-link>
+                  </a-menu-item>
+                  <a-menu-divider />
                   <a-menu-item @click="doLogout">
                     <LogoutOutlined />
                     退出登录
@@ -61,6 +68,7 @@ import {
   UserOutlined,
   DiffOutlined,
   FileImageOutlined,
+  CloudOutlined,
 } from '@ant-design/icons-vue'
 import { useLoginUserStore } from '@/stores/useLoginUserStore'
 import { logoutUsingPost } from '@/api/userController'
@@ -75,6 +83,7 @@ const iconMap = {
   ContactsOutlined,
   DiffOutlined,
   FileImageOutlined,
+  CloudOutlined,
 } as const
 type IconName = keyof typeof iconMap
 const isIconName = (value: unknown): value is IconName => {

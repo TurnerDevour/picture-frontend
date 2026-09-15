@@ -3,7 +3,7 @@
     <a-flex justify="space-between">
       <h2>图片管理</h2>
       <a-space>
-        <a-button type="primary" href="/admin/add_picture" target="_blank">+ 创建图片</a-button>
+        <a-button type="primary" href="/add_picture" target="_blank">+ 创建图片</a-button>
         <a-button type="primary" href="/admin/add_picture/batch" target="_blank" ghost
           >+ 批量创建图片</a-button
         >
@@ -107,7 +107,7 @@
             >
               拒绝
             </a-button>
-            <a-button type="link" :href="`/admin/add_picture?id=${record.id}`" target="_blank"
+            <a-button type="link" :href="`/add_picture?id=${record.id}`" target="_blank"
               >编辑
             </a-button>
             <a-button type="link" danger @click="doDelete(record.id)">删除</a-button>
@@ -171,7 +171,10 @@ const columns = [
   {
     title: '用户 id',
     dataIndex: 'userId',
-    width: 80,
+  },
+  {
+    title: '空间 id',
+    dataIndex: 'spaceId',
   },
   {
     title: '创建时间',
@@ -214,6 +217,7 @@ const pagination = computed(() => {
 const fetchData = async () => {
   const res = await listPictureByPageUsingPost({
     ...searchParams,
+    nullSpaceId: true, // 只获取没有空间的图片， 管理页面只能看到需要审核的图片，私人空间中的图片不在管理页面显示
   })
   if (res.data.data) {
     const pageData = res.data?.data
