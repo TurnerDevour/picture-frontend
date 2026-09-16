@@ -10,47 +10,14 @@
       </a-space>
     </a-flex>
 
-    <a-form style="margin-bottom: 16px" layout="inline" :model="searchParams" @finish="doSearch">
-      <a-form-item label="关键词" name="searchText">
-        <a-input
-          v-model:value="searchParams.searchText"
-          placeholder="从名称和简介搜索"
-          allow-clear
-        />
-      </a-form-item>
-      <a-form-item label="类型" name="category">
-        <a-select
-          v-model:value="searchParams.category"
-          :options="categoryOptions"
-          placeholder="请输入类型"
-          style="min-width: 180px"
-          allow-clear
-        />
-      </a-form-item>
-      <a-form-item label="标签" name="tags">
-        <a-select
-          v-model:value="searchParams.tags"
-          mode="tags"
-          :options="tagOptions"
-          placeholder="请输入标签"
-          style="min-width: 180px"
-          allow-clear
-        />
-      </a-form-item>
-      <a-form-item label="审核状态" name="reviewStatus">
-        <a-select
-          v-model:value="searchParams.reviewStatus"
-          :options="PIC_REVIEW_STATUS_OPTIONS"
-          placeholder="请输入审核状态"
-          style="min-width: 180px"
-          allow-clear
-        />
-      </a-form-item>
-
-      <a-form-item>
-        <a-button type="primary" html-type="submit">搜索</a-button>
-      </a-form-item>
-    </a-form>
+    <picture-search-form
+      :onSearch="
+        (params) => {
+          updateSearchParams(params)
+          doSearch()
+        }
+      "
+    />
 
     <a-table
       :columns="columns"
@@ -124,14 +91,10 @@ import { message } from 'ant-design-vue'
 import {
   deletePictureUsingPost,
   listPictureByPageUsingPost,
-  listPictureTagCategoryUsingGet,
   reviewPictureUsingPost,
 } from '@/api/pictureController'
-import {
-  PIC_REVIEW_STATUS_ENUM,
-  PIC_REVIEW_STATUS_MAP,
-  PIC_REVIEW_STATUS_OPTIONS,
-} from '@/constant/picture'
+import { PIC_REVIEW_STATUS_ENUM, PIC_REVIEW_STATUS_MAP } from '@/constant/picture'
+import PictureSearchForm from '@/components/PictureSearchForm.vue'
 
 const columns = [
   {
@@ -202,6 +165,13 @@ const searchParams = reactive<API.PictureQueryDTO>({
   sortOrder: 'descend',
 })
 
+const updateSearchParams = (params: API.PictureQueryDTO) => {
+  for (const key of Object.keys(searchParams) as (keyof API.PictureQueryDTO)[]) {
+    delete searchParams[key]
+  }
+  Object.assign(searchParams, params)
+}
+
 // 分页参数
 const pagination = computed(() => {
   return {
@@ -225,34 +195,6 @@ const fetchData = async () => {
     total.value = Number(pageData.total) ?? 0
   } else {
     message.error('获取数据失败，' + res.data.message)
-  }
-}
-
-// 获取标签和分类选项
-type OptionItem = {
-  value: string
-  label: string
-}
-const categoryOptions = ref<OptionItem[]>([])
-const tagOptions = ref<OptionItem[]>([])
-const getTagCategoryOptions = async () => {
-  const res = await listPictureTagCategoryUsingGet()
-  if (res.data.code === 0 && res.data.data) {
-    // 转换成下拉选项组件接受的格式
-    tagOptions.value = (res.data.data.tagList ?? []).map((data: string) => {
-      return {
-        value: data,
-        label: data,
-      }
-    })
-    categoryOptions.value = (res.data.data.categoryList ?? []).map((data: string) => {
-      return {
-        value: data,
-        label: data,
-      }
-    })
-  } else {
-    message.error('加载选项失败，' + res.data.message)
   }
 }
 
@@ -307,7 +249,6 @@ const handleReview = async (record: API.Picture, reviewStatus: number) => {
 // 页面加载时请求一次
 onMounted(() => {
   fetchData()
-  getTagCategoryOptions()
 })
 </script>
 

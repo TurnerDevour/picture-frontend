@@ -11,6 +11,12 @@ declare namespace API {
     message?: string
   }
 
+  type BaseResponseListImageSearchResult_ = {
+    code?: number
+    data?: ImageSearchResult[]
+    message?: string
+  }
+
   type BaseResponseListSpaceLevelVO_ = {
     code?: number
     data?: SpaceLevelVO[]
@@ -141,6 +147,11 @@ declare namespace API {
     id: string
   }
 
+  type ImageSearchResult = {
+    fromUrl?: string
+    thumbUrl?: string
+  }
+
   type LoginUserVO = {
     /** 创建时间 */
     createTime?: string
@@ -236,7 +247,7 @@ declare namespace API {
     /** 审核人 id */
     reviewerId?: number
     /** 空间 id（为空表示公共空间） */
-    spaceId?: string
+    spaceId?: number
     /** 标签（JSON 数组） */
     tags?: string
     /** 缩略图 url */
@@ -259,7 +270,7 @@ declare namespace API {
     /** 图片名称 */
     name?: string
     /** 空间 id */
-    spaceId?: string
+    spaceId?: number
     /** 标签（JSON 数组） */
     tags?: string[]
   }
@@ -269,6 +280,8 @@ declare namespace API {
     category?: string
     /** 当前页号 */
     current?: number
+    /** 结束编辑时间 */
+    endEditTime?: string
     /** id */
     id?: string
     /** 简介 */
@@ -300,7 +313,9 @@ declare namespace API {
     sortField?: string
     sortOrder?: string
     /** 空间 id */
-    spaceId?: string
+    spaceId?: number
+    /** 开始编辑时间 */
+    startEditTime?: string
     /** 标签（JSON 数组） */
     tags?: string[]
     /** 创建用户 id */
@@ -349,7 +364,7 @@ declare namespace API {
     /** 图片名称 */
     picName?: string
     /** 空间 id */
-    spaceId?: string
+    spaceId?: number
     /** 图片url */
     url?: string
   }
@@ -378,7 +393,7 @@ declare namespace API {
     /** 图片宽度 */
     picWidth?: number
     /** 空间 id */
-    spaceId?: string
+    spaceId?: number
     /** 标签（JSON 数组） */
     tags?: string[]
     /** 缩略图 url */
@@ -390,6 +405,11 @@ declare namespace API {
     user?: UserVO
     /** 创建用户 id */
     userId?: string
+  }
+
+  type SearchPictureByPictureDTO = {
+    /** 图片 id */
+    pictureId: string
   }
 
   type Space = {
@@ -506,7 +526,7 @@ declare namespace API {
     /** 图片名称 */
     picName?: string
     /** 空间 id */
-    spaceId?: string
+    spaceId?: number
     /** 图片url */
     url?: string
   }

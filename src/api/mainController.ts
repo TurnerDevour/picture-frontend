@@ -1,3 +1,5 @@
+// @ts-ignore
+/* eslint-disable */
 import request from '@/request/request'
 
 /** health GET /api/health */

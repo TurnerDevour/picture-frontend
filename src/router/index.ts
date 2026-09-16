@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/admin/add_picture/batch',
     name: 'addPictureBatch',
-    meta: { title: '批量添加图片', icon: 'FileAddOutlined', role: ACCESS.ADMIN, showNav: true },
+    meta: { title: '批量添加图片', icon: 'FileAddOutlined', role: ACCESS.ADMIN, showNav: false },
     component: () => import('@/pages/AddPictureBathPage.vue'),
   },
   {
@@ -88,6 +88,12 @@ const routes: Array<RouteRecordRaw> = [
     meta: { title: '空间详情', role: ACCESS.USER, showNav: false },
     component: () => import('@/pages/SpaceDetailPage.vue'),
     props: true,
+  },
+  {
+    path: '/search_picture',
+    name: 'searchPicture',
+    meta: { title: '搜索图片', icon: 'SearchOutlined', role: ACCESS.USER, showNav: false },
+    component: () => import('@/pages/SearchPicturePage.vue'),
   },
 ]
 

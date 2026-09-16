@@ -29,6 +29,7 @@ import {
   Tooltip,
   Progress,
   Typography,
+  DatePicker,
 } from 'ant-design-vue'
 
 const Antd: Plugin = {
@@ -60,6 +61,7 @@ const Antd: Plugin = {
     app.use(Tooltip)
     app.use(Progress)
     app.use(Typography)
+    app.use(DatePicker)
   },
 }
 

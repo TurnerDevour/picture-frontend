@@ -23,6 +23,8 @@
       </a-space>
     </a-flex>
 
+    <picture-search-form :onSearch="onSearch" />
+
     <!-- 图片列表 -->
     <PictureList :dataList="dataList" :loading="loading" showOp :onReload="fetchData" />
     <a-pagination
@@ -39,10 +41,11 @@
 <script setup lang="ts">
 import { listPictureVoByPageUsingPost } from '@/api/pictureController'
 import { message } from 'ant-design-vue'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { getSpaceVoByIdUsingGet } from '@/api/spaceController'
 import { formatSize } from '@/utils'
 import PictureList from '@/components/PictureList.vue'
+import PictureSearchForm from '@/components/PictureSearchForm.vue'
 
 const props = defineProps<{
   id: string
@@ -71,7 +74,7 @@ const total = ref<number>(0)
 const loading = ref(true)
 
 // 搜索条件
-const searchParams = reactive<API.PictureQueryDTO>({
+const searchParams = ref<API.PictureQueryDTO>({
   current: 1,
   pageSize: 12,
   sortField: 'createTime',
@@ -80,8 +83,19 @@ const searchParams = reactive<API.PictureQueryDTO>({
 
 // 分页参数
 const onPageChange = (page: number, pageSize: number) => {
-  searchParams.current = page
-  searchParams.pageSize = pageSize
+  searchParams.value.current = page
+  searchParams.value.pageSize = pageSize
+  fetchData()
+}
+
+// 搜索
+const onSearch = (newSearchParams: API.PictureQueryDTO) => {
+  searchParams.value = {
+    // ...searchParams.value,
+    ...newSearchParams,
+    current: 1,
+  }
+
   fetchData()
 }
 
@@ -91,12 +105,12 @@ const fetchData = async () => {
   // 转换搜索参数
   const params = {
     spaceId: props.id,
-    ...searchParams,
+    ...searchParams.value,
   }
   const res = await listPictureVoByPageUsingPost(params)
   if (res.data.data) {
     dataList.value = res.data.data.records ?? []
-    total.value = Number(res.data.data.total) ?? 0
+    total.value = res.data.data.total ?? 0
   } else {
     await message.error('获取数据失败，' + res.data.message)
   }
