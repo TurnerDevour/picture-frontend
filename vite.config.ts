@@ -10,6 +10,18 @@ export default defineConfig({
     vue(),
     // vueDevTools(),
   ],
+  build: {
+    chunkSizeWarningLimit: 1024, // 单位：kB
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vue: ['vue', 'vue-router', 'pinia'],
+          antd: ['ant-design-vue', '@ant-design/icons-vue'],
+          axios: ['axios'],
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

@@ -24,7 +24,7 @@
     </a-flex>
 
     <!-- 图片列表 -->
-    <PictureList :dataList="dataList" :loading="loading" showOp @onReload="fetchData" />
+    <PictureList :dataList="dataList" :loading="loading" showOp :onReload="fetchData" />
     <a-pagination
       style="text-align: right"
       v-model:current="searchParams.current"
@@ -64,10 +64,6 @@ const fetchSpaceDetail = async () => {
     await message.error('获取空间详情失败：' + (e as Error).message)
   }
 }
-
-onMounted(() => {
-  fetchSpaceDetail()
-})
 
 // 数据
 const dataList = ref<API.PictureVO[]>([])
@@ -109,6 +105,8 @@ const fetchData = async () => {
 
 // 页面加载时请求一次
 onMounted(() => {
+  fetchSpaceDetail()
+
   fetchData()
 })
 </script>
