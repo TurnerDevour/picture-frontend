@@ -50,8 +50,8 @@ const handleUpload = async () => {
     } else {
       message.error('图片上传失败，' + res.data.message)
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
+  } catch (e: any) {
+    console.log(e)
     message.error('图片上传失败')
   } finally {
     loading.value = false

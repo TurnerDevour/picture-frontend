@@ -15,5 +15,11 @@ export default [
 
   ...pluginVue.configs['flat/essential'],
   ...vueTsEslintConfig(),
+  {
+    name: 'app/allow-any',
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
   skipFormatting,
 ]
