@@ -39,7 +39,7 @@ const handleUpload = async () => {
     if (props.picture) {
       params.id = props.picture.id
     }
-    if (props.spaceId) {
+    if (props.spaceId && props.spaceId !== 'undefined') {
       params.spaceId = props.spaceId
     }
     const res = await uploadPictureByUrlUsingPost(params)

@@ -1,5 +1,3 @@
-// @ts-ignore
-/* eslint-disable */
 import request from '@/request/request'
 
 /** addSpace POST /api/space/add */
@@ -17,7 +15,7 @@ export async function addSpaceUsingPost(body: API.SpaceAddDTO, options?: { [key:
 /** deleteSpace POST /api/space/delete */
 export async function deleteSpaceUsingPost(
   body: API.DeleteRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseBoolean_>('/api/space/delete', {
     method: 'POST',
@@ -45,7 +43,7 @@ export async function editSpaceUsingPost(body: API.SpaceEditDTO, options?: { [ke
 export async function getSpaceByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getSpaceByIdUsingGETParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseSpace_>('/api/space/get', {
     method: 'GET',
@@ -60,7 +58,7 @@ export async function getSpaceByIdUsingGet(
 export async function getSpaceVoByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getSpaceVOByIdUsingGETParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseSpaceVO_>('/api/space/get/vo', {
     method: 'GET',
@@ -82,7 +80,7 @@ export async function listSpaceLevelUsingGet(options?: { [key: string]: any }) {
 /** listSpaceByPage POST /api/space/list/page */
 export async function listSpaceByPageUsingPost(
   body: API.SpaceQueryDTO,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponsePageSpace_>('/api/space/list/page', {
     method: 'POST',
@@ -97,7 +95,7 @@ export async function listSpaceByPageUsingPost(
 /** listSpaceVOByPage POST /api/space/list/page/vo */
 export async function listSpaceVoByPageUsingPost(
   body: API.SpaceQueryDTO,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponsePageSpaceVO_>('/api/space/list/page/vo', {
     method: 'POST',
@@ -112,7 +110,7 @@ export async function listSpaceVoByPageUsingPost(
 /** updateSpace POST /api/space/update */
 export async function updateSpaceUsingPost(
   body: API.SpaceUpdateDTO,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseBoolean_>('/api/space/update', {
     method: 'POST',

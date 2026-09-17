@@ -17,6 +17,12 @@ declare namespace API {
     message?: string
   }
 
+  type BaseResponseListPictureVO_ = {
+    code?: number
+    data?: PictureVO[]
+    message?: string
+  }
+
   type BaseResponseListSpaceLevelVO_ = {
     code?: number
     data?: SpaceLevelVO[]
@@ -228,6 +234,8 @@ declare namespace API {
     isDelete?: number
     /** 图片名称 */
     name?: string
+    /** 图片主色调 */
+    picColor?: string
     /** 图片格式 */
     picFormat?: string
     /** 图片高度 */
@@ -247,7 +255,7 @@ declare namespace API {
     /** 审核人 id */
     reviewerId?: number
     /** 空间 id（为空表示公共空间） */
-    spaceId?: number
+    spaceId?: string
     /** 标签（JSON 数组） */
     tags?: string
     /** 缩略图 url */
@@ -260,6 +268,19 @@ declare namespace API {
     userId?: string
   }
 
+  type PictureEditByBatchDTO = {
+    /** 分类 */
+    category?: string
+    /** 命名规则 */
+    nameRule?: string
+    /** 图片 id 列表 */
+    pictureIdList?: number[]
+    /** 空间 id */
+    spaceId?: string
+    /** 标签 */
+    tags?: string[]
+  }
+
   type PictureEditDTO = {
     /** 分类 */
     category?: string
@@ -270,7 +291,7 @@ declare namespace API {
     /** 图片名称 */
     name?: string
     /** 空间 id */
-    spaceId?: number
+    spaceId?: string
     /** 标签（JSON 数组） */
     tags?: string[]
   }
@@ -313,7 +334,7 @@ declare namespace API {
     sortField?: string
     sortOrder?: string
     /** 空间 id */
-    spaceId?: number
+    spaceId?: string
     /** 开始编辑时间 */
     startEditTime?: string
     /** 标签（JSON 数组） */
@@ -364,7 +385,7 @@ declare namespace API {
     /** 图片名称 */
     picName?: string
     /** 空间 id */
-    spaceId?: number
+    spaceId?: string
     /** 图片url */
     url?: string
   }
@@ -382,6 +403,8 @@ declare namespace API {
     introduction?: string
     /** 图片名称 */
     name?: string
+    /** 图片主色调 */
+    picColor?: string
     /** 图片格式 */
     picFormat?: string
     /** 图片高度 */
@@ -393,7 +416,7 @@ declare namespace API {
     /** 图片宽度 */
     picWidth?: number
     /** 空间 id */
-    spaceId?: number
+    spaceId?: string
     /** 标签（JSON 数组） */
     tags?: string[]
     /** 缩略图 url */
@@ -405,6 +428,13 @@ declare namespace API {
     user?: UserVO
     /** 创建用户 id */
     userId?: string
+  }
+
+  type SearchPictureByColorDTO = {
+    /** 图片主色调 */
+    picColor?: string
+    /** 空间 id */
+    spaceId?: string
   }
 
   type SearchPictureByPictureDTO = {
@@ -526,7 +556,7 @@ declare namespace API {
     /** 图片名称 */
     picName?: string
     /** 空间 id */
-    spaceId?: number
+    spaceId?: string
     /** 图片url */
     url?: string
   }

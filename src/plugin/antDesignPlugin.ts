@@ -30,6 +30,8 @@ import {
   Progress,
   Typography,
   DatePicker,
+  QRCode,
+  Modal,
 } from 'ant-design-vue'
 
 const Antd: Plugin = {
@@ -62,6 +64,8 @@ const Antd: Plugin = {
     app.use(Progress)
     app.use(Typography)
     app.use(DatePicker)
+    app.use(QRCode)
+    app.use(Modal)
   },
 }
 

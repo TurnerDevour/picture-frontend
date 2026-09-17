@@ -46,6 +46,19 @@
             <a-descriptions-item label="大小">
               {{ formatSize(picture.picSize) }}
             </a-descriptions-item>
+            <a-descriptions-item label="主色调">
+              <a-space>
+                {{ picture.picColor ?? '-' }}
+                <div
+                  v-if="picture.picColor"
+                  :style="{
+                    backgroundColor: toHexColor(picture.picColor),
+                    width: '16px',
+                    height: '16px',
+                  }"
+                />
+              </a-space>
+            </a-descriptions-item>
           </a-descriptions>
 
           <a-space wrap>
@@ -67,10 +80,18 @@
                 <DownloadOutlined />
               </template>
             </a-button>
+            <a-button type="primary" ghost @click="doShare">
+              分享
+              <template #icon>
+                <ShareAltOutlined />
+              </template>
+            </a-button>
           </a-space>
         </a-card>
       </a-col>
     </a-row>
+
+    <ShareModal ref="shareModalRef" title="分享图片" :link="shareLink" />
   </div>
 </template>
 
@@ -78,10 +99,16 @@
 import { computed, onMounted, ref } from 'vue'
 import { deletePictureUsingPost, getPictureVoByIdUsingGet } from '@/api/pictureController'
 import { message } from 'ant-design-vue'
-import { DeleteOutlined, EditOutlined, DownloadOutlined } from '@ant-design/icons-vue'
-import { downloadImage, formatSize } from '@/utils'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  DownloadOutlined,
+  ShareAltOutlined,
+} from '@ant-design/icons-vue'
+import { downloadImage, formatSize, toHexColor } from '@/utils'
 import { useLoginUserStore } from '@/stores/useLoginUserStore'
 import { useRouter } from 'vue-router'
+import ShareModal from '@/components/ShareModal.vue'
 
 const router = useRouter()
 const loginUserStore = useLoginUserStore()
@@ -101,11 +128,11 @@ const fetchPictureDetail = async () => {
     if (res.data.code === 0 && res.data.data) {
       picture.value = res.data.data
     } else {
-      message.error('获取图片详情失败，' + res.data.message)
+      await message.error('获取图片详情失败，' + res.data.message)
     }
   } catch (e: unknown) {
     const errorMessage = e instanceof Error ? e.message : '未知错误'
-    message.error('获取图片详情失败：' + errorMessage)
+    await message.error('获取图片详情失败：' + errorMessage)
   }
 }
 
@@ -133,15 +160,33 @@ const doDelete = async () => {
   }
   const res = await deletePictureUsingPost({ id })
   if (res.data.code === 0) {
-    message.success('删除成功')
+    await message.success('删除成功')
   } else {
-    message.error('删除失败')
+    await message.error('删除失败')
   }
 }
 
 // 下载
 const doDownload = () => {
   downloadImage(picture.value.url, picture.value.name)
+}
+
+// 分享弹窗引用
+const shareModalRef = ref()
+// 分享链接
+const shareLink = ref<string>('')
+
+// 分享
+const doShare = () => {
+  const id = picture.value.id
+  if (!id) {
+    return
+  }
+  shareLink.value = `${window.location.protocol}//${window.location.host}/picture/${id}`
+
+  if (shareModalRef.value) {
+    shareModalRef.value.openModal()
+  }
 }
 
 onMounted(() => {

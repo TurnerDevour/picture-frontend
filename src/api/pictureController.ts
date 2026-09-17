@@ -1,4 +1,3 @@
-/* eslint-disable */
 import request from '@/request/request'
 
 /** deletePicture POST /api/picture/delete */
@@ -22,6 +21,21 @@ export async function editPictureUsingPost(
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseBoolean_>('/api/picture/edit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** editPictureByBatch POST /api/picture/edit/batch */
+export async function editPictureByBatchUsingPost(
+  body: API.PictureEditByBatchDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseBoolean_>('/api/picture/edit/batch', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -112,6 +126,21 @@ export async function reviewPictureUsingPost(
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseBoolean_>('/api/picture/review', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** searchPictureByColor POST /api/picture/search/color */
+export async function searchPictureByColorUsingPost(
+  body: API.SearchPictureByColorDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListPictureVO_>('/api/picture/search/color', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
