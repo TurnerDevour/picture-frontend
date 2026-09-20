@@ -95,6 +95,12 @@ const routes: Array<RouteRecordRaw> = [
     meta: { title: '搜索图片', icon: 'SearchOutlined', role: ACCESS.USER, showNav: false },
     component: () => import('@/pages/SearchPicturePage.vue'),
   },
+  {
+    path: '/space_analyze',
+    name: 'spaceAnalyze',
+    meta: { title: '空间分析', icon: 'BarChartOutlined', role: ACCESS.USER, showNav: false },
+    component: () => import('@/pages/SpaceAnalyzePage.vue'),
+  },
 ]
 
 const router = createRouter({

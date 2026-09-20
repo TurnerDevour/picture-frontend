@@ -176,7 +176,7 @@ declare namespace API {
 
   type CreatePictureOutPaintingTaskDTO = {
     parameters?: Parameters
-    pictureId?: number
+    pictureId?: string
   }
 
   type DeleteRequest = {
@@ -540,7 +540,7 @@ declare namespace API {
 
   type SearchPictureByPictureDTO = {
     /** 图片 id */
-    pictureId: string
+    pictureId: number
   }
 
   type Space = {

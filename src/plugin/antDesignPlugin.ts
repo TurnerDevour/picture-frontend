@@ -32,6 +32,7 @@ import {
   DatePicker,
   QRCode,
   Modal,
+  Segmented,
 } from 'ant-design-vue'
 
 const Antd: Plugin = {
@@ -66,6 +67,7 @@ const Antd: Plugin = {
     app.use(DatePicker)
     app.use(QRCode)
     app.use(Modal)
+    app.use(Segmented)
   },
 }
 
