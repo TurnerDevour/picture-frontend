@@ -35,9 +35,39 @@ declare namespace API {
     message?: string
   }
 
+  type BaseResponseListSpace_ = {
+    code?: number
+    data?: Space[]
+    message?: string
+  }
+
+  type BaseResponseListSpaceCategoryAnalyzeVO_ = {
+    code?: number
+    data?: SpaceCategoryAnalyzeVO[]
+    message?: string
+  }
+
   type BaseResponseListSpaceLevelVO_ = {
     code?: number
     data?: SpaceLevelVO[]
+    message?: string
+  }
+
+  type BaseResponseListSpaceSizeAnalyzeVO_ = {
+    code?: number
+    data?: SpaceSizeAnalyzeVO[]
+    message?: string
+  }
+
+  type BaseResponseListSpaceTagAnalyzeVO_ = {
+    code?: number
+    data?: SpaceTagAnalyzeVO[]
+    message?: string
+  }
+
+  type BaseResponseListSpaceUserAnalyzeVO_ = {
+    code?: number
+    data?: SpaceUserAnalyzeVO[]
     message?: string
   }
 
@@ -107,6 +137,12 @@ declare namespace API {
     message?: string
   }
 
+  type BaseResponseSpaceUsageAnalyzeVO_ = {
+    code?: number
+    data?: SpaceUsageAnalyzeVO
+    message?: string
+  }
+
   type BaseResponseSpaceVO_ = {
     code?: number
     data?: SpaceVO
@@ -140,7 +176,7 @@ declare namespace API {
 
   type CreatePictureOutPaintingTaskDTO = {
     parameters?: Parameters
-    pictureId?: string
+    pictureId?: number
   }
 
   type DeleteRequest = {
@@ -541,6 +577,18 @@ declare namespace API {
     spaceName?: string
   }
 
+  type SpaceCategoryAnalyzeDTO = {
+    queryAll?: boolean
+    queryPublic?: boolean
+    spaceId?: string
+  }
+
+  type SpaceCategoryAnalyzeVO = {
+    category?: string
+    count?: number
+    totalSize?: number
+  }
+
   type SpaceEditDTO = {
     /** 空间 id */
     id?: string
@@ -576,6 +624,32 @@ declare namespace API {
     userId?: string
   }
 
+  type SpaceRankAnalyzeDTO = {
+    topN?: number
+  }
+
+  type SpaceSizeAnalyzeDTO = {
+    queryAll?: boolean
+    queryPublic?: boolean
+    spaceId?: string
+  }
+
+  type SpaceSizeAnalyzeVO = {
+    count?: number
+    sizeRange?: string
+  }
+
+  type SpaceTagAnalyzeDTO = {
+    queryAll?: boolean
+    queryPublic?: boolean
+    spaceId?: string
+  }
+
+  type SpaceTagAnalyzeVO = {
+    count?: number
+    tag?: string
+  }
+
   type SpaceUpdateDTO = {
     /** 空间 id */
     id?: string
@@ -587,6 +661,34 @@ declare namespace API {
     spaceLevel?: number
     /** 空间名称 */
     spaceName?: string
+  }
+
+  type SpaceUsageAnalyzeDTO = {
+    queryAll?: boolean
+    queryPublic?: boolean
+    spaceId?: string
+  }
+
+  type SpaceUsageAnalyzeVO = {
+    countUsageRatio?: number
+    maxCount?: number
+    maxSize?: number
+    sizeUsageRatio?: number
+    usedCount?: number
+    usedSize?: number
+  }
+
+  type SpaceUserAnalyzeDTO = {
+    queryAll?: boolean
+    queryPublic?: boolean
+    spaceId?: string
+    timeDimension?: string
+    userId?: string
+  }
+
+  type SpaceUserAnalyzeVO = {
+    count?: number
+    period?: string
   }
 
   type SpaceVO = {

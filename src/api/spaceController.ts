@@ -12,6 +12,96 @@ export async function addSpaceUsingPost(body: API.SpaceAddDTO, options?: { [key:
   })
 }
 
+/** getSpaceCategoryAnalyze GET /api/space/analyze/category */
+export async function getSpaceCategoryAnalyzeUsingGet(
+  body: API.SpaceCategoryAnalyzeDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListSpaceCategoryAnalyzeVO_>('/api/space/analyze/category', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** getSpaceRankAnalyze GET /api/space/analyze/rank */
+export async function getSpaceRankAnalyzeUsingGet(
+  body: API.SpaceRankAnalyzeDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListSpace_>('/api/space/analyze/rank', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** getSpaceSizeAnalyze GET /api/space/analyze/size */
+export async function getSpaceSizeAnalyzeUsingGet(
+  body: API.SpaceSizeAnalyzeDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListSpaceSizeAnalyzeVO_>('/api/space/analyze/size', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** getSpaceTagAnalyze GET /api/space/analyze/tag */
+export async function getSpaceTagAnalyzeUsingGet(
+  body: API.SpaceTagAnalyzeDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListSpaceTagAnalyzeVO_>('/api/space/analyze/tag', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** getSpaceUsageAnalyze GET /api/space/analyze/usage */
+export async function getSpaceUsageAnalyzeUsingGet(
+  body: API.SpaceUsageAnalyzeDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseSpaceUsageAnalyzeVO_>('/api/space/analyze/usage', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** getSpaceUserAnalyze GET /api/space/analyze/user */
+export async function getSpaceUserAnalyzeUsingGet(
+  body: API.SpaceUserAnalyzeDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListSpaceUserAnalyzeVO_>('/api/space/analyze/user', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
 /** deleteSpace POST /api/space/delete */
 export async function deleteSpaceUsingPost(
   body: API.DeleteRequest,
