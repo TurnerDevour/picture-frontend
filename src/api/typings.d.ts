@@ -387,7 +387,7 @@ declare namespace API {
     /** 命名规则 */
     nameRule?: string
     /** 图片 id 列表 */
-    pictureIdList?: number[]
+    pictureIdList?: string[]
     /** 空间 id */
     spaceId?: string
     /** 标签 */

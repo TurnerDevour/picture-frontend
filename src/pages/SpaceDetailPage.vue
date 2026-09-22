@@ -163,7 +163,6 @@ const onPageChange = (page: number, pageSize: number) => {
 // 搜索
 const onSearch = (newSearchParams: API.PictureQueryDTO) => {
   searchParams.value = {
-    // ...searchParams.value,
     ...newSearchParams,
     current: 1,
   }
