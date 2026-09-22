@@ -32,7 +32,7 @@ export async function getSpaceRankAnalyzeUsingPost(
   body: API.SpaceRankAnalyzeDTO,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseListSpace_>('/api/space/analyze/rank', {
+  return request<API.BaseResponseListSpaceRankAnalyzeVO_>('/api/space/analyze/rank', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

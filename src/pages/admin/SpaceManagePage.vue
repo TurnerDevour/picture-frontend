@@ -26,6 +26,16 @@
           allow-clear
         />
       </a-form-item>
+      <a-form-item label="空间类别" name="spaceType">
+        <a-select
+          v-model:value="searchParams.spaceType"
+          :options="SPACE_TYPE_OPTIONS"
+          placeholder="请输入空间类别"
+          style="min-width: 180px"
+          allow-clear
+        />
+      </a-form-item>
+
       <a-form-item label="用户 id" name="userId">
         <a-input v-model:value="searchParams.userId" placeholder="请输入用户 id" allow-clear />
       </a-form-item>
@@ -45,6 +55,10 @@
         <!-- 空间级别 -->
         <template v-if="column.dataIndex === 'spaceLevel'">
           <a-tag>{{ SPACE_LEVEL_MAP[record.spaceLevel] }}</a-tag>
+        </template>
+        <!-- 空间类别 -->
+        <template v-if="column.dataIndex === 'spaceType'">
+          <a-tag>{{ SPACE_TYPE_MAP[record.spaceType] }}</a-tag>
         </template>
         <!-- 使用情况 -->
         <template v-if="column.dataIndex === 'spaceUseInfo'">
@@ -75,7 +89,12 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { message } from 'ant-design-vue'
 import { deleteSpaceUsingPost, listSpaceByPageUsingPost } from '@/api/spaceController'
 import { formatSize } from '@/utils'
-import { SPACE_LEVEL_MAP, SPACE_LEVEL_OPTIONS } from '@/constant/space'
+import {
+  SPACE_LEVEL_MAP,
+  SPACE_LEVEL_OPTIONS,
+  SPACE_TYPE_MAP,
+  SPACE_TYPE_OPTIONS,
+} from '@/constant/space'
 
 const columns = [
   {
@@ -90,6 +109,10 @@ const columns = [
   {
     title: '空间级别',
     dataIndex: 'spaceLevel',
+  },
+  {
+    title: '空间类别',
+    dataIndex: 'spaceType',
   },
   {
     title: '使用情况',
@@ -115,7 +138,7 @@ const columns = [
 ]
 
 // 数据
-const dataList = ref<API.SpaceVO[]>([])
+const dataList = ref<API.Space[]>([])
 const total = ref(0)
 
 // 搜索条件
@@ -142,11 +165,12 @@ const fetchData = async () => {
   const res = await listSpaceByPageUsingPost({
     ...searchParams,
   })
-  if (res.data.data) {
-    dataList.value = res.data.data.records ?? []
-    total.value = Number(res.data.data.total) ?? 0
+  const data = res.data?.data
+  if (data) {
+    dataList.value = data.records ?? []
+    total.value = Number(data.total ?? 0)
   } else {
-    message.error('获取数据失败，' + res.data.message)
+    await message.error(`获取数据失败，${res.data?.message ?? '未知错误'}`)
   }
 }
 
@@ -174,11 +198,11 @@ const doDelete = async (id: string) => {
     id,
   })
   if (res.data.code === 0) {
-    message.success('删除成功')
     // 刷新数据
     await fetchData()
+    await message.success('删除成功')
   } else {
-    message.error('删除失败')
+    await message.error('删除失败')
   }
 }
 </script>

@@ -105,21 +105,6 @@ export async function listPictureVoByPageUsingPost(
   })
 }
 
-/** listPictureVOByPageCacheDual POST /api/picture/list/page/vo/cache/dual */
-export async function listPictureVoByPageCacheDualUsingPost(
-  body: API.PictureQueryDTO,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponsePagePictureVO_>('/api/picture/list/page/vo/cache/dual', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: body,
-    ...(options || {}),
-  })
-}
-
 /** createPictureOutPaintingTask POST /api/picture/out_painting/create_task */
 export async function createPictureOutPaintingTaskUsingPost(
   body: API.CreatePictureOutPaintingTaskDTO,

@@ -101,6 +101,13 @@ const routes: Array<RouteRecordRaw> = [
     meta: { title: '空间分析', icon: 'BarChartOutlined', role: ACCESS.USER, showNav: false },
     component: () => import('@/pages/SpaceAnalyzePage.vue'),
   },
+  {
+    path: '/spaceUserManage/:id',
+    name: 'spaceUserManage',
+    meta: { title: '空间用户管理', icon: 'TeamOutlined', role: ACCESS.USER, showNav: false },
+    component: () => import('@/pages/admin/SpaceUserManagePage.vue'),
+    props: true,
+  },
 ]
 
 const router = createRouter({

@@ -35,12 +35,6 @@ declare namespace API {
     message?: string
   }
 
-  type BaseResponseListSpace_ = {
-    code?: number
-    data?: Space[]
-    message?: string
-  }
-
   type BaseResponseListSpaceCategoryAnalyzeVO_ = {
     code?: number
     data?: SpaceCategoryAnalyzeVO[]
@@ -50,6 +44,12 @@ declare namespace API {
   type BaseResponseListSpaceLevelVO_ = {
     code?: number
     data?: SpaceLevelVO[]
+    message?: string
+  }
+
+  type BaseResponseListSpaceRankAnalyzeVO_ = {
+    code?: number
+    data?: SpaceRankAnalyzeVO[]
     message?: string
   }
 
@@ -68,6 +68,12 @@ declare namespace API {
   type BaseResponseListSpaceUserAnalyzeVO_ = {
     code?: number
     data?: SpaceUserAnalyzeVO[]
+    message?: string
+  }
+
+  type BaseResponseListSpaceUserVO_ = {
+    code?: number
+    data?: SpaceUserVO[]
     message?: string
   }
 
@@ -140,6 +146,12 @@ declare namespace API {
   type BaseResponseSpaceUsageAnalyzeVO_ = {
     code?: number
     data?: SpaceUsageAnalyzeVO
+    message?: string
+  }
+
+  type BaseResponseSpaceUser_ = {
+    code?: number
+    data?: SpaceUser
     message?: string
   }
 
@@ -504,6 +516,8 @@ declare namespace API {
     introduction?: string
     /** 图片名称 */
     name?: string
+    /** 权限列表 */
+    permissionList?: string[]
     /** 图片主色调 */
     picColor?: string
     /** 图片格式 */
@@ -540,7 +554,7 @@ declare namespace API {
 
   type SearchPictureByPictureDTO = {
     /** 图片 id */
-    pictureId: number
+    pictureId: string
   }
 
   type Space = {
@@ -560,6 +574,8 @@ declare namespace API {
     spaceLevel?: number
     /** 空间名称 */
     spaceName?: string
+    /** 空间类型：0-私有 1-团队 */
+    spaceType?: number
     /** 当前空间下的图片数量 */
     totalCount?: number
     /** 当前空间下图片的总大小 */
@@ -575,6 +591,8 @@ declare namespace API {
     spaceLevel?: number
     /** 空间名称 */
     spaceName?: string
+    /** 空间类型：0-私有 1-团队 */
+    spaceType?: number
   }
 
   type SpaceCategoryAnalyzeDTO = {
@@ -620,12 +638,25 @@ declare namespace API {
     spaceLevel?: number
     /** 空间名称 */
     spaceName?: string
+    /** 空间类型：0-私有 1-团队 */
+    spaceType?: number
     /** 创建用户id */
     userId?: string
   }
 
   type SpaceRankAnalyzeDTO = {
     topN?: number
+  }
+
+  type SpaceRankAnalyzeVO = {
+    /** 空间 id */
+    id?: string
+    /** 空间名称 */
+    spaceName?: string
+    /** 当前空间下图片的总大小 */
+    totalSize?: number
+    /** 创建用户 id */
+    userId?: string
   }
 
   type SpaceSizeAnalyzeDTO = {
@@ -678,6 +709,30 @@ declare namespace API {
     usedSize?: number
   }
 
+  type SpaceUser = {
+    /** 创建时间 */
+    createTime?: string
+    /** id */
+    id?: string
+    /** 空间 id */
+    spaceId?: string
+    /** 空间角色：viewer/editor/admin */
+    spaceRole?: string
+    /** 更新时间 */
+    updateTime?: string
+    /** 用户 id */
+    userId?: string
+  }
+
+  type SpaceUserAddDTO = {
+    /** 空间 ID */
+    spaceId?: string
+    /** 空间角色：viewer/editor/admin */
+    spaceRole?: string
+    /** 用户 ID */
+    userId?: string
+  }
+
   type SpaceUserAnalyzeDTO = {
     queryAll?: boolean
     queryPublic?: boolean
@@ -691,6 +746,41 @@ declare namespace API {
     period?: string
   }
 
+  type SpaceUserEditDTO = {
+    /** id */
+    id?: string
+    /** 空间角色：viewer/editor/admin */
+    spaceRole?: string
+  }
+
+  type SpaceUserQueryDTO = {
+    /** ID */
+    id?: string
+    /** 空间 ID */
+    spaceId?: string
+    /** 空间角色：viewer/editor/admin */
+    spaceRole?: string
+    /** 用户 ID */
+    userId?: string
+  }
+
+  type SpaceUserVO = {
+    /** 创建时间 */
+    createTime?: string
+    /** id */
+    id?: string
+    space?: SpaceVO
+    /** 空间 id */
+    spaceId?: string
+    /** 空间角色 */
+    spaceRole?: string
+    /** 更新时间 */
+    updateTime?: string
+    user?: UserVO
+    /** 用户 id */
+    userId?: string
+  }
+
   type SpaceVO = {
     /** 创建时间 */
     createTime?: string
@@ -702,10 +792,14 @@ declare namespace API {
     maxCount?: number
     /** 空间图片的最大总大小 */
     maxSize?: number
+    /** 权限列表 */
+    permissionList?: string[]
     /** 空间级别：0-普通版 1-专业版 2-旗舰版 */
     spaceLevel?: number
     /** 空间名称 */
     spaceName?: string
+    /** 空间类型：0-私有 1-团队 */
+    spaceType: number
     /** 当前空间下的图片数量 */
     totalCount?: number
     /** 当前空间下图片的总大小 */

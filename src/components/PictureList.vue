@@ -33,8 +33,8 @@
             <template v-if="showOp" #actions>
               <search-outlined @click="(e: Event) => doSearch(picture, e)" />
               <share-alt-outlined @click="(e: Event) => doShare(picture, e)" />
-              <edit-outlined @click="(e: Event) => doEdit(picture, e)" />
-              <delete-outlined @click="(e: Event) => doDelete(picture, e)" />
+              <edit-outlined v-if="canEdit" @click="(e: Event) => doEdit(picture, e)" />
+              <delete-outlined v-if="canDelete" @click="(e: Event) => doDelete(picture, e)" />
             </template>
           </a-card>
         </a-list-item>
@@ -63,12 +63,16 @@ interface Props {
   loading?: boolean
   showOp?: boolean
   onReload?: () => void
+  canEdit?: boolean
+  canDelete?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   dataList: () => [],
   loading: false,
   showOp: false,
+  canEdit: false,
+  canDelete: false,
   onReload: () => {},
 })
 
