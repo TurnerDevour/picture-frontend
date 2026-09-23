@@ -32,6 +32,18 @@ npm run dev
 npm run build
 ```
 
+## Environment variables
+
+Vite automatically loads the environment file for the active mode:
+
+| Command | Mode | API base URL variable |
+| --- | --- | --- |
+| `npm run dev` | development | `.env.development` |
+| `npm run build` | production | `.env.production` |
+
+Set `VITE_API_BASE_URL` in the corresponding file. For machine-specific overrides, create
+`.env.development.local` or `.env.production.local`; these files are ignored by Git.
+
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
